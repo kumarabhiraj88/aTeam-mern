@@ -10,7 +10,6 @@ const Sidebar = () => {
   const logout = async () => {
     await logoutAction();
     localStorage.removeItem("token");
-    localStorage.removeItem("privilegeId");
     localStorage.removeItem("name");
     localStorage.removeItem("userid");
     navigate("/");
