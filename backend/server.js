@@ -3,10 +3,11 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
+import globalErrorHandler from "./src/utils/GlobalErrorHandler.js";
 
 //routes
-import userRoutes from "./src/routes/user.js";
-import productRoutes from "./src/routes/product.js";
+import userRoutes from "./src/routes/userRoutes.js";
+import productRoutes from "./src/routes/productRoutes.js";
 
 const app = express();
 app.use(express.json());
@@ -18,7 +19,7 @@ app.use("/api/admin/user", userRoutes);
 app.use("/api/admin/product", productRoutes);
 
 //ERROR HANDLER
-//app.use(globalErrorHandler);
+app.use(globalErrorHandler);
 
 const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
@@ -32,7 +33,6 @@ mongoose
   .connect(DB_CONN_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
   })
   .then(() => {
     console.log("Database Connected");

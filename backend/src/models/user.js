@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema(
   {
@@ -24,7 +25,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-userSchema.virtual("password").set(function (password) {
+userSchema.virtual("Password").set(function (password) {
   const salt = 10;
   this.hash_password = bcrypt.hashSync(password, salt);
 });

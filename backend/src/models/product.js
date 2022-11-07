@@ -16,7 +16,7 @@ const productSchema = new mongoose.Schema({
     type: String,
   },
   vitamin: {
-    type: String,
+    type: Number,
   },
 });
 

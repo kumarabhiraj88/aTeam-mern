@@ -14,7 +14,7 @@ router.post(
   productController.addProduct
 );
 router.get(
-  "/:productId/details",
+  "/:productId/detail",
   verifyToken(),
   productController.productDetails
 );

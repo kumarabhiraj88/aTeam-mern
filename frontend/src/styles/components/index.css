@@ -1,0 +1,22 @@
+.loader {
+  display: none;
+}
+
+.loading-indicator .loader {
+  display: block;
+  z-index: 9999999;
+}
+
+.pageContainer {
+  margin-top: 2%;
+}
+
+.Pagehead {
+  margin-top: 1%;
+  margin-bottom: 20px;
+}
+
+/* .searchBar {
+  width: 95%;
+  float: left;
+} */

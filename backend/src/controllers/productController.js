@@ -4,11 +4,22 @@ import messageHelper from "../helpers/messages.js";
 
 const getProducts = async (req, res, next) => {
   try {
+    let limit = parseInt(req.query.limit);
+    let skip = parseInt(req.query.skip);
     let query = req.query.query;
-    let criteria = {
-      $or: [{ name: { $regex: query } }, { price: { $regex: query } }],
-    };
-    let productlist = ProductModel.find(criteria).select(
+    let criteria = {};
+    if (query) {
+      criteria = {
+        ...criteria,
+        $or: [
+          { name: { $regex: query, $options: "i" } },
+          { price: { $regex: query, $options: "i" } },
+          { color: { $regex: query, $options: "i" } },
+        ],
+      };
+    }
+
+    let productlist = await ProductModel.find(criteria).select(
       "name price color vitamin"
     );
     let totalProductsCount = await ProductModel.countDocuments(criteria);
@@ -35,6 +46,7 @@ const addProduct = async (req, res, next) => {
 const productDetails = async (req, res, next) => {
   try {
     const { productId } = req.params;
+    console.log(req.params);
     const product = await ProductModel.findOne({ _id: productId });
     if (!product) {
       throw Error(messageHelper.PRODUCT_NOT_EXIST);
