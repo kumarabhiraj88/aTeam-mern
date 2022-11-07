@@ -10,7 +10,6 @@ export const authAction = (payload) => {
         localStorage.setItem("name", data.data.user.fullName);
         localStorage.setItem("loggeduserid", data.data.user._id);
       }
-      console.log(data);
       dispatch({
         type: userTypes.AUTHENTICATE_USER,
         payload: data,
